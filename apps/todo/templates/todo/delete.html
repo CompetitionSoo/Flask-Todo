@@ -1,0 +1,17 @@
+{% extends "todo/base.html" %}
+{% block title %}할일 삭제{% endblock %}
+{% block content %}
+<form
+action="{{ url_for('todo.delete', todo_id=todo.id) }}"
+method="POST"
+novalidate="novalidate"
+>
+    {{ form.csrf_token }}
+    <p>{{ todo.id }}번 할일 정말 삭제하시겠습니까?</p>
+    <p><input type="submit" value="삭제" />
+    <a href="{{ url_for('todo.index') }}">➜뒤로가기</a>
+    </p>
+    
+
+</form>
+{% endblock %}
