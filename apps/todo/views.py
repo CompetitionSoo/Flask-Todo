@@ -2,6 +2,7 @@ from apps.app import db
 from apps.todo.models import Todo     # 데이터베이스에서 사용할 모델을 가져옵니다
 from apps.todo.forms import TodoForm  # 사용자로부터 할 일 내용을 입력받을 폼
 from flask import Blueprint, render_template, request, redirect, url_for
+from flask_login import login_required
 
 # Blueprint 생성한다
 todo = Blueprint(
@@ -14,6 +15,7 @@ todo = Blueprint(
 
 # Index 페이지 (할 일 목록 표시 및 추가)
 @todo.route("/", methods=["GET", "POST"])
+@login_required
 def index() :
     form = TodoForm()
     if request.method == "POST" :
@@ -34,6 +36,7 @@ def index() :
 
 ## 할 일 삭제
 @todo.route("/delete/<todo_id>", methods=["GET", "POST"])
+@login_required
 def delete(todo_id) :
     form = TodoForm() # 삭제페이지에 사용할 폼 생성
 
